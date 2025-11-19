@@ -711,11 +711,11 @@
 
             <div id="stage2" class="thesis-content">
                 <h4 style="color: var(--dark-blue);">Stage 2: Flow-Conditioned Detail Refinement (FCDR)</h4>
-                <p style="margin-bottom: 20px;">以第一階段生成的結構先驗 ($\hat{x}_{FM}$) 為基礎，專注於生成高頻殘差。</p>
+                <p style="margin-bottom: 20px;">以第一階段生成的結構先驗 (x&#770;<sub>FM</sub>) 為基礎，專注於生成高頻殘差。</p>
                 <ul style="list-style: none; padding: 0;">
                     <li style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                         <i class="fas fa-sliders-h" style="color: var(--accent-blue); margin-right: 10px;"></i>
-                        <strong>品質因子控制 (QF Control)：</strong> 引入 $\tau(QF)$ 參數，根據壓縮程度自適應調整修復強度。低 QF 增強紋理補償，高 QF 保持細節。
+                        <strong>品質因子控制 (QF Control)：</strong> 引入 &tau;(QF) 參數，根據壓縮程度自適應調整修復強度。低 QF 增強紋理補償，高 QF 保持細節。
                     </li>
                     <li style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                         <i class="fas fa-brain" style="color: var(--accent-blue); margin-right: 10px;"></i>
@@ -978,4 +978,5 @@
         }
     </script>
 </body>
+
 </html>
