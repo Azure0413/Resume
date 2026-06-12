@@ -1,998 +1,1365 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>陳冠言 Kuan-Yen Chen | Research & Engineering Portfolio</title>
-    <link rel="icon" href="icon.png" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-blue: #e3f2fd;
-            --secondary-blue: #90caf9;
-            --dark-blue: #1565c0;
-            --accent-blue: #0d47a1;
-            --bg-white: #ffffff;
-            --text-grey: #546e7a;
-            --text-dark: #263238;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            --hover-shadow: 0 15px 30px rgba(21, 101, 192, 0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', 'Noto Sans TC', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: #f8f9fa;
-            color: var(--text-dark);
-            line-height: 1.8;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark-blue);
-            letter-spacing: 1px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-grey);
-            margin-left: 1.5rem;
-            font-weight: 500;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle at top right, #e3f2fd 0%, #fff 60%);
-            padding: 100px 20px;
-            flex-direction: column; /* Mobile default */
-        }
-
-        .hero-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            max-width: 1200px;
-            gap: 60px;
-            flex-wrap: wrap-reverse; /* Photo on top on mobile, right on desktop */
-        }
-
-        .hero-content {
-            flex: 1;
-            min-width: 300px;
-            text-align: left;
-        }
-
-        .hero-photo {
-            flex: 0 0 300px;
-            position: relative;
-        }
-
-        .hero-photo img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 8px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 40px rgba(21, 101, 192, 0.2);
-            transition: transform 0.3s;
-        }
-
-        .hero-photo img:hover {
-            transform: scale(1.02);
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-            font-weight: 800;
-            line-height: 1.2;
-        }
-
-        .hero-content p {
-            font-size: 1.25rem;
-            color: var(--text-grey);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-        }
-
-        .typewriter {
-            color: var(--dark-blue);
-            font-weight: 700;
-            border-right: 3px solid var(--dark-blue);
-            padding-right: 5px;
-            animation: blink 0.7s step-end infinite;
-        }
-
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 35px;
-            background-color: var(--dark-blue);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(21, 101, 192, 0.3);
-            background-color: var(--accent-blue);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--dark-blue);
-            color: var(--dark-blue);
-            margin-left: 10px;
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary-blue);
-            color: var(--dark-blue);
-            box-shadow: none;
-        }
-
-        /* Section Styles */
-        section {
-            padding: 100px 8%;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--text-dark);
-            position: relative;
-            display: inline-block;
-            font-weight: 700;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 4px;
-            background: var(--dark-blue);
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        /* --- Research/Thesis Interactive Section (NEW) --- */
-        .thesis-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            padding: 40px;
-            max-width: 1100px;
-            margin: 0 auto;
-            border: 1px solid #e0e0e0;
-        }
-
-        .thesis-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .thesis-header h3 {
-            font-size: 2rem;
-            color: var(--dark-blue);
-            margin-bottom: 10px;
-        }
-
-        .thesis-tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .thesis-tab {
-            padding: 10px 25px;
-            border-radius: 30px;
-            background: #f1f3f4;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-grey);
-            transition: all 0.3s;
-            border: 1px solid transparent;
-        }
-
-        .thesis-tab.active {
-            background: var(--dark-blue);
-            color: white;
-            box-shadow: 0 5px 15px rgba(21,101,192,0.3);
-        }
-
-        .thesis-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .thesis-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Conceptual Diagram Styles */
-        .diagram-flow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 30px 0;
-            position: relative;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .diagram-box {
-            background: white;
-            border: 2px solid var(--secondary-blue);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            flex: 1;
-            min-width: 180px;
-            position: relative;
-            transition: transform 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-        }
-
-        .diagram-box:hover {
-            transform: translateY(-5px);
-            border-color: var(--dark-blue);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .diagram-box h4 { color: var(--dark-blue); margin-bottom: 8px; }
-        .diagram-box p { font-size: 0.9rem; color: var(--text-grey); }
-        .diagram-box i { font-size: 2rem; color: var(--secondary-blue); margin-bottom: 10px; display: block; }
-
-        .arrow-right {
-            font-size: 1.5rem;
-            color: var(--text-grey);
-        }
-
-        .diagram-detail {
-            background: #f8fbff;
-            border-left: 4px solid var(--accent-blue);
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .metric-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .metric-card {
-            background: var(--dark-blue);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .metric-card h5 { font-size: 1.2rem; margin-bottom: 5px; }
-        .metric-card span { font-size: 0.9rem; opacity: 0.8; }
-
-        /* --- End Thesis CSS --- */
-
-        /* Cards - Education & Experience */
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: var(--bg-white);
-            padding: 2.5rem;
-            border-radius: 16px;
-            margin-bottom: 2.5rem;
-            box-shadow: var(--shadow);
-            border-left: 6px solid var(--secondary-blue);
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
-            border-left-color: var(--dark-blue);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 1rem;
-        }
-
-        .card-title h3 {
-            font-size: 1.6rem;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .card-title span {
-            color: var(--dark-blue);
-            font-weight: 500;
-            font-size: 1rem;
-            display: block;
-        }
-
-        .card-date {
-            color: var(--text-grey);
-            font-size: 0.9rem;
-            background: #f0f4f8;
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-weight: 600;
-        }
-
-        .card-content p {
-            color: #455a64;
-            margin-bottom: 0.8rem;
-            font-size: 1.05rem;
-        }
-
-        .tag {
-            display: inline-block;
-            background: #e3f2fd;
-            color: var(--dark-blue);
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            margin-right: 8px;
-            margin-top: 8px;
-            font-weight: 500;
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.4s;
-            border: 1px solid rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .project-body {
-            padding: 2rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-body h3 {
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-            font-size: 1.4rem;
-        }
-
-        .project-role {
-            font-size: 0.9rem;
-            color: var(--accent-blue);
-            margin-bottom: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .project-desc {
-            color: #546e7a;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-            font-size: 1rem;
-        }
-
-        .project-footer {
-            margin-top: auto;
-            padding-top: 1.5rem;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        /* Skills */
-        .skills-section { background-color: white; }
-        
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .skill-item {
-            background: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid #e0e0e0;
-            color: var(--text-dark);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s;
-        }
-
-        .skill-item:hover {
-            background: var(--dark-blue);
-            color: white;
-            border-color: var(--dark-blue);
-            transform: translateY(-3px);
-        }
-
-        /* Footer */
-        footer {
-            background: white;
-            padding: 60px 0;
-            text-align: center;
-            border-top: 1px solid #eee;
-        }
-
-        .social-icons a {
-            color: var(--text-grey);
-            font-size: 1.8rem;
-            margin: 0 20px;
-            transition: color 0.3s, transform 0.3s;
-            display: inline-block;
-        }
-
-        .social-icons a:hover {
-            color: var(--dark-blue);
-            transform: scale(1.1);
-        }
-
-        @media (max-width: 768px) {
-            .hero { padding-top: 120px; }
-            .hero-container { flex-direction: column-reverse; text-align: center; }
-            .hero-content { text-align: center; }
-            .hero-photo img { width: 200px; height: 200px; }
-            .nav-links { display: none; }
-            .diagram-flow { flex-direction: column; }
-            .arrow-right { transform: rotate(90deg); margin: 10px 0; }
-            .metric-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陳冠言 Eric Chen | AI Research & Engineering Portfolio</title>
+<meta name="description" content="陳冠言 Eric Chen — 國立成功大學資訊工程研究所，Flow Matching、電腦視覺與生成式 AI 研究者。">
+<link rel="icon" href="icon.png" type="image/png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ Design Tokens ============ */
+:root{
+  --sky:#1976d2;
+  --deep:#0d47a1;
+  --mid:#1565c0;
+  --bright:#42a5f5;
+  --pale:#90caf9;
+  --mist:#e3f2fd;
+  --whisper:#f6faff;
+  --white:#ffffff;
+  --ink:#17263c;
+  --ink-soft:#46586e;
+  --grey:#78909c;
+  --accent:#ff6b35;
+  --gold:#ffc400;
+  --magenta:#e91e8c;
+  --line:rgba(21,101,192,.12);
+  --shadow:0 6px 24px rgba(13,71,161,.07);
+  --shadow-hover:0 20px 45px rgba(13,71,161,.16);
+  --radius:18px;
+  --font-display:'Inter','Noto Sans TC',sans-serif;
+  --font-body:'Inter','Noto Sans TC',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  font-family:var(--font-body);
+  background:var(--white);
+  color:var(--ink);
+  line-height:1.85;
+  overflow-x:hidden;
+}
+@media (pointer:fine){ body{cursor:none} body a,body button,body .thesis-tab{cursor:none} }
+::selection{background:var(--bright);color:#fff}
+img{max-width:100%}
+a{color:var(--mid)}
+
+/* ============ Custom Cursor (ukiyo-e flow) ============ */
+.cursor-dot,.cursor-ring,.trail-dot{
+  position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+  border-radius:50%;will-change:transform;
+}
+.cursor-dot{width:8px;height:8px;background:var(--sky);transform:translate(-50%,-50%)}
+.cursor-ring{
+  width:36px;height:36px;border:2px solid rgba(25,118,210,.55);
+  transform:translate(-50%,-50%);
+  transition:width .25s ease,height .25s ease,border-color .25s ease,background .25s ease;
+}
+.cursor-ring.is-hover{
+  width:56px;height:56px;border-color:var(--accent);
+  background:rgba(255,107,53,.08);
+}
+.trail-dot{width:6px;height:6px;background:var(--bright);opacity:.8}
+.trail-dot:nth-child(odd){background:var(--pale)}
+.trail-dot:nth-child(3n){width:4px;height:4px;background:var(--sky)}
+.ripple{
+  position:fixed;border-radius:50%;pointer-events:none;z-index:9998;
+  border:2px solid var(--bright);transform:translate(-50%,-50%);
+  animation:rippleAnim .7s ease-out forwards;
+}
+@keyframes rippleAnim{
+  from{width:10px;height:10px;opacity:.9}
+  to{width:110px;height:110px;opacity:0}
+}
+@media (pointer:coarse){
+  .cursor-dot,.cursor-ring,.trail-dot{display:none}
+}
+
+/* ============ Navigation ============ */
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 6%;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:box-shadow .35s,padding .35s,background .35s;
+}
+nav.scrolled{
+  box-shadow:0 4px 24px rgba(13,71,161,.1);
+  padding:12px 6%;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-mark{
+  width:42px;height:42px;border-radius:12px;
+  background:linear-gradient(135deg,var(--mid),var(--bright));
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-weight:600;font-size:1rem;letter-spacing:.5px;
+  box-shadow:0 4px 14px rgba(21,101,192,.35);
+}
+.logo-text{display:flex;flex-direction:column;line-height:1.2}
+.logo-text b{color:var(--ink);font-size:1.02rem;font-weight:700}
+.logo-text span{color:var(--grey);font-size:.72rem;font-family:var(--font-mono);letter-spacing:1px}
+.nav-links{display:flex;gap:6px}
+.nav-links a{
+  text-decoration:none;color:var(--ink-soft);font-weight:500;font-size:.92rem;
+  padding:8px 14px;border-radius:10px;transition:color .25s,background .25s;
+}
+.nav-links a:hover{color:var(--mid);background:var(--mist)}
+.hamburger{display:none;background:none;border:none;font-size:1.4rem;color:var(--mid)}
+@media (max-width:880px){
+  .nav-links{
+    position:fixed;top:68px;right:0;flex-direction:column;
+    background:rgba(255,255,255,.98);backdrop-filter:blur(18px);
+    width:min(260px,80vw);padding:18px;gap:4px;
+    border-radius:0 0 0 20px;box-shadow:-8px 12px 30px rgba(13,71,161,.12);
+    transform:translateX(110%);transition:transform .35s ease;
+  }
+  .nav-links.open{transform:translateX(0)}
+  .hamburger{display:block}
+}
+
+/* ============ Hero ============ */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:130px 6% 90px;
+  background:
+    radial-gradient(ellipse 800px 500px at 85% 12%,rgba(144,202,249,.28),transparent 60%),
+    radial-gradient(ellipse 700px 600px at 8% 90%,rgba(227,242,253,.85),transparent 65%),
+    var(--white);
+  overflow:hidden;
+}
+#particles{position:absolute;inset:0;width:100%;height:100%}
+.hero-deco{position:absolute;border-radius:50%;pointer-events:none;will-change:transform}
+.deco-1{width:420px;height:420px;border:1.5px dashed rgba(66,165,245,.35);top:-120px;right:-110px}
+.deco-2{width:200px;height:200px;background:radial-gradient(circle,rgba(255,196,0,.16),transparent 70%);bottom:12%;left:4%}
+.deco-3{width:120px;height:120px;border:2px solid rgba(255,107,53,.2);top:22%;left:10%}
+.hero-inner{
+  position:relative;z-index:2;display:flex;align-items:center;justify-content:center;
+  gap:70px;max-width:1180px;width:100%;flex-wrap:wrap-reverse;
+}
+.hero-content{flex:1 1 460px;min-width:300px}
+.eyebrow{
+  font-family:var(--font-mono);font-size:.8rem;letter-spacing:3px;
+  color:var(--sky);text-transform:uppercase;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:'';width:34px;height:2px;background:var(--accent);display:inline-block}
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.5rem,5.5vw,3.9rem);
+  font-weight:800;line-height:1.15;color:var(--ink);letter-spacing:-.5px;
+}
+.hero h1 .en{
+  display:block;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:600;
+  color:var(--mid);margin-top:6px;letter-spacing:1px;
+}
+.typewriter-wrap{
+  min-height:2.4em;margin:18px 0 10px;
+  font-family:var(--font-mono);font-size:clamp(1rem,2vw,1.25rem);font-weight:500;
+  color:var(--deep);
+}
+.typewriter{border-right:3px solid var(--accent);padding-right:6px;animation:blink .75s step-end infinite}
+@keyframes blink{50%{border-color:transparent}}
+.hero-tagline{color:var(--ink-soft);font-size:1.05rem;max-width:560px;margin-bottom:6px}
+.hero-tagline-en{
+  color:var(--grey);font-size:.92rem;font-style:italic;max-width:560px;margin-bottom:30px;
+}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:13px 30px;border-radius:50px;text-decoration:none;
+  font-weight:600;font-size:.95rem;letter-spacing:.3px;
+  transition:transform .3s,box-shadow .3s,background .3s;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--mid),var(--sky));color:#fff;
+  box-shadow:0 8px 22px rgba(21,101,192,.32);
+}
+.btn-primary:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(21,101,192,.42)}
+.btn-outline{border:2px solid var(--mid);color:var(--mid);background:transparent}
+.btn-outline:hover{background:var(--mist);transform:translateY(-4px)}
+.btn-ghost{color:var(--ink-soft);background:var(--whisper);border:1px solid var(--line)}
+.btn-ghost:hover{color:var(--mid);transform:translateY(-4px)}
+.hero-stats{display:flex;gap:clamp(20px,4vw,56px);flex-wrap:wrap}
+.stat{position:relative}
+.stat b{
+  font-family:var(--font-mono);font-size:clamp(1.7rem,3vw,2.3rem);font-weight:600;
+  color:var(--mid);display:block;line-height:1.1;
+}
+.stat b sup{color:var(--accent);font-size:.6em}
+.stat span{font-size:.82rem;color:var(--grey)}
+.hero-photo{flex:0 0 320px;position:relative;display:flex;justify-content:center}
+.photo-ring{
+  position:absolute;inset:-18px;border-radius:50%;
+  border:2px dashed var(--pale);
+  animation:spin 26s linear infinite;
+}
+.photo-ring::before{
+  content:'';position:absolute;width:14px;height:14px;border-radius:50%;
+  background:var(--accent);top:8%;left:82%;
+  box-shadow:0 0 14px rgba(255,107,53,.7);
+}
+.photo-ring::after{
+  content:'';position:absolute;width:10px;height:10px;border-radius:50%;
+  background:var(--gold);bottom:6%;left:14%;
+  box-shadow:0 0 12px rgba(255,196,0,.7);
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-photo img{
+  width:300px;height:300px;border-radius:50%;object-fit:cover;
+  border:8px solid rgba(255,255,255,.92);
+  box-shadow:0 26px 60px rgba(13,71,161,.25);
+  position:relative;z-index:1;
+  transition:transform .4s ease;
+}
+.hero-photo:hover img{transform:scale(1.03)}
+@media (max-width:560px){
+  .hero-photo{flex:0 0 230px}
+  .hero-photo img{width:220px;height:220px}
+}
+
+/* ============ Wave divider ============ */
+.wave{display:block;width:100%;height:90px;margin-bottom:-2px}
+
+/* ============ Sections ============ */
+section{padding:100px 6%}
+.section-head{text-align:center;max-width:760px;margin:0 auto 64px}
+.section-head .eyebrow{justify-content:center}
+.section-head .eyebrow::after{content:'';width:34px;height:2px;background:var(--accent)}
+.section-head h2{
+  font-size:clamp(1.9rem,3.6vw,2.6rem);font-weight:800;color:var(--ink);
+  letter-spacing:-.5px;line-height:1.25;
+}
+.section-head p{color:var(--grey);margin-top:10px;font-size:.98rem}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ============ About ============ */
+.about-grid{
+  display:grid;grid-template-columns:1.45fr 1fr;gap:50px;
+  max-width:1100px;margin:0 auto;align-items:start;
+}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr}}
+.about-text p{margin-bottom:18px;color:var(--ink-soft);font-size:1.02rem}
+.about-text strong{color:var(--mid);font-weight:700}
+.about-side{
+  background:var(--whisper);border:1px solid var(--line);
+  border-radius:var(--radius);padding:32px;
+}
+.about-side h3{
+  font-size:1rem;color:var(--deep);margin-bottom:18px;
+  font-family:var(--font-mono);letter-spacing:1.5px;text-transform:uppercase;
+}
+.interest-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.itag{
+  padding:8px 16px;border-radius:30px;font-size:.85rem;font-weight:500;
+  background:#fff;border:1px solid var(--line);color:var(--mid);
+  transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+.itag:hover{transform:translateY(-3px);border-color:var(--bright);box-shadow:0 6px 16px rgba(21,101,192,.12)}
+.about-fact{display:flex;align-items:center;gap:14px;margin-bottom:14px;color:var(--ink-soft);font-size:.94rem}
+.about-fact i{
+  width:38px;height:38px;border-radius:10px;flex:0 0 38px;
+  background:var(--mist);color:var(--mid);
+  display:flex;align-items:center;justify-content:center;font-size:.95rem;
+}
+
+/* ============ Education timeline ============ */
+.timeline{max-width:900px;margin:0 auto;position:relative}
+.timeline::before{
+  content:'';position:absolute;left:13px;top:8px;bottom:8px;width:2px;
+  background:linear-gradient(var(--bright),var(--pale));
+}
+.tcard{
+  position:relative;margin:0 0 36px 56px;
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:32px 36px;box-shadow:var(--shadow);
+  transition:transform .35s,box-shadow .35s,border-color .35s;
+}
+.tcard:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover);border-color:rgba(66,165,245,.4)}
+.tcard::before{
+  content:'';position:absolute;left:-50px;top:38px;width:16px;height:16px;border-radius:50%;
+  background:#fff;border:4px solid var(--sky);box-shadow:0 0 0 5px rgba(66,165,245,.18);
+}
+.tcard-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+.tcard h3{font-size:1.3rem;color:var(--ink);font-weight:700;line-height:1.4}
+.tcard h3 small{display:block;font-size:.85rem;color:var(--sky);font-weight:600;letter-spacing:.4px}
+.date-pill{
+  font-family:var(--font-mono);font-size:.78rem;color:var(--mid);font-weight:500;
+  background:var(--mist);padding:6px 16px;border-radius:30px;white-space:nowrap;
+}
+.tcard .role{color:var(--mid);font-weight:600;font-size:.95rem;margin-bottom:10px}
+.tcard ul{padding-left:20px;color:var(--ink-soft);font-size:.95rem}
+.tcard ul li{margin-bottom:6px}
+.tcard ul li::marker{color:var(--bright)}
+.pub{
+  background:var(--whisper);border-left:4px solid var(--gold);
+  border-radius:0 10px 10px 0;padding:14px 18px;margin-top:14px;
+  font-size:.88rem;color:var(--ink-soft);
+}
+.pub a{color:var(--mid);font-weight:600;text-decoration:none;border-bottom:1px dashed var(--bright)}
+.tag{
+  display:inline-block;background:var(--mist);color:var(--mid);
+  padding:5px 13px;border-radius:8px;font-size:.78rem;font-weight:500;
+  margin:8px 8px 0 0;font-family:var(--font-mono);
+}
+.tag.hot{background:#fff1ea;color:var(--accent)}
+.tag.gold{background:#fff8db;color:#b28704}
+
+/* ============ Thesis ============ */
+#thesis{background:linear-gradient(180deg,var(--whisper),#eef6ff 60%,var(--whisper))}
+.thesis-box{
+  max-width:1080px;margin:0 auto;background:#fff;
+  border-radius:24px;border:1px solid var(--line);
+  box-shadow:var(--shadow);padding:clamp(26px,4vw,48px);
+}
+.thesis-tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:34px}
+.thesis-tab{
+  padding:10px 24px;border-radius:30px;font-weight:600;font-size:.9rem;
+  background:var(--whisper);color:var(--ink-soft);border:1px solid var(--line);
+  transition:all .3s;user-select:none;
+}
+.thesis-tab:hover{border-color:var(--bright);color:var(--mid)}
+.thesis-tab.active{
+  background:linear-gradient(135deg,var(--mid),var(--sky));color:#fff;border-color:transparent;
+  box-shadow:0 6px 18px rgba(21,101,192,.35);
+}
+.thesis-content{display:none;animation:fadeUp .5s ease}
+.thesis-content.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.flow-diagram{display:flex;align-items:stretch;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:10px 0 24px}
+.flow-node{
+  flex:1 1 170px;background:#fff;border:2px solid var(--pale);
+  border-radius:14px;padding:20px 16px;text-align:center;
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+}
+.flow-node:hover{transform:translateY(-6px);border-color:var(--sky);box-shadow:0 10px 24px rgba(21,101,192,.14)}
+.flow-node i{font-size:1.7rem;color:var(--bright);display:block;margin-bottom:10px}
+.flow-node h4{color:var(--deep);font-size:.98rem;margin-bottom:6px}
+.flow-node p{font-size:.8rem;color:var(--grey);line-height:1.6}
+.flow-node.stage{background:linear-gradient(160deg,#e8f3ff,#f3f9ff);border-color:var(--bright)}
+.flow-node.stage i{color:var(--mid)}
+.flow-arrow{align-self:center;color:var(--bright);font-size:1.3rem;flex:0 0 auto}
+@media (max-width:760px){.flow-arrow{transform:rotate(90deg);width:100%;text-align:center}}
+.flow-note{
+  background:var(--whisper);border-left:4px solid var(--accent);
+  padding:18px 22px;border-radius:0 12px 12px 0;color:var(--ink-soft);font-size:.95rem;
+}
+.tri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+@media (max-width:760px){.tri-grid{grid-template-columns:1fr}}
+.tri-card{
+  border-radius:16px;padding:26px 20px;text-align:center;
+  transition:transform .3s;
+}
+.tri-card:hover{transform:translateY(-6px)}
+.tri-card i{font-size:1.9rem;margin-bottom:12px;display:block}
+.tri-card h5{font-size:1.05rem;margin-bottom:4px}
+.tri-card .metric{font-family:var(--font-mono);font-size:.82rem;opacity:.85}
+.tri-card p{font-size:.82rem;margin-top:8px;opacity:.85}
+.tri-1{background:linear-gradient(150deg,var(--deep),var(--mid));color:#fff}
+.tri-2{background:linear-gradient(150deg,var(--bright),var(--pale));color:var(--deep)}
+.tri-3{background:#fff;border:2px solid var(--accent);color:var(--accent)}
+.thesis-list{list-style:none}
+.thesis-list li{
+  background:var(--whisper);border:1px solid var(--line);
+  padding:16px 20px;border-radius:12px;margin-bottom:12px;
+  display:flex;gap:14px;align-items:flex-start;color:var(--ink-soft);font-size:.95rem;
+  transition:transform .25s,border-color .25s;
+}
+.thesis-list li:hover{transform:translateX(6px);border-color:var(--bright)}
+.thesis-list i{color:var(--mid);margin-top:5px}
+.thesis-list strong{color:var(--ink)}
+
+/* ============ Projects ============ */
+.projects-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:26px;
+  max-width:1200px;margin:0 auto;
+}
+@media (max-width:1080px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:680px){.projects-grid{grid-template-columns:1fr}}
+.pcard{
+  position:relative;background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);padding:30px 28px;
+  box-shadow:var(--shadow);overflow:hidden;
+  transition:box-shadow .35s,border-color .35s;
+  transform-style:preserve-3d;will-change:transform;
+  display:flex;flex-direction:column;
+}
+.pcard::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--sky),var(--bright),var(--pale));
+}
+.pcard.featured::before{background:linear-gradient(90deg,var(--accent),var(--gold))}
+.pcard::after{ /* glare */
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.65),transparent 45%);
+  transition:opacity .3s;
+}
+.pcard:hover{box-shadow:var(--shadow-hover);border-color:rgba(66,165,245,.45)}
+.pcard:hover::after{opacity:1}
+.pcard.featured{grid-column:span 2;background:linear-gradient(160deg,#fff 55%,#f0f7ff)}
+@media (max-width:680px){.pcard.featured{grid-column:span 1}}
+.pcard .badge{
+  position:absolute;top:18px;right:18px;
+  font-family:var(--font-mono);font-size:.68rem;font-weight:600;letter-spacing:1px;
+  padding:5px 12px;border-radius:30px;
+  background:#fff1ea;color:var(--accent);border:1px solid rgba(255,107,53,.3);
+}
+.pcard .badge.blue{background:var(--mist);color:var(--mid);border-color:rgba(66,165,245,.3)}
+.pcard .badge.gold{background:#fff8db;color:#b28704;border-color:rgba(255,196,0,.4)}
+.p-icon{
+  width:52px;height:52px;border-radius:14px;margin-bottom:18px;
+  background:linear-gradient(135deg,var(--mist),#fff);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;color:var(--mid);
+}
+.pcard h3{font-size:1.18rem;color:var(--ink);font-weight:700;line-height:1.45;margin-bottom:4px}
+.pcard .prole{font-family:var(--font-mono);font-size:.76rem;color:var(--sky);letter-spacing:.8px;margin-bottom:12px}
+.pcard p.desc{color:var(--ink-soft);font-size:.92rem;flex:1}
+.pcard .ptags{margin-top:16px}
+.plink{
+  display:inline-flex;align-items:center;gap:7px;margin-top:16px;
+  font-size:.86rem;font-weight:600;color:var(--mid);text-decoration:none;
+}
+.plink i{transition:transform .25s}
+.plink:hover i{transform:translateX(5px)}
+
+/* ============ Experience ============ */
+#experience{background:var(--whisper)}
+.exp-wrap{max-width:900px;margin:0 auto;display:grid;gap:30px}
+.exp-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:36px 40px;box-shadow:var(--shadow);
+  border-left:6px solid var(--bright);
+  transition:transform .35s,box-shadow .35s,border-left-color .35s;
+}
+.exp-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover);border-left-color:var(--accent)}
+.exp-head{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:flex-start;margin-bottom:14px}
+.exp-head h3{font-size:1.3rem;color:var(--ink)}
+.exp-head .role{display:block;color:var(--mid);font-weight:600;font-size:.95rem;margin-top:2px}
+.exp-card ul{padding-left:20px;color:var(--ink-soft);font-size:.94rem}
+.exp-card ul li{margin-bottom:7px}
+.exp-card ul li::marker{color:var(--accent)}
+.exp-card ul strong{color:var(--ink)}
+
+/* ============ Skills ============ */
+.skills-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:30px;
+  max-width:1050px;margin:0 auto;
+}
+@media (max-width:840px){.skills-grid{grid-template-columns:1fr}}
+.skill-group{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:32px 34px;box-shadow:var(--shadow);
+}
+.skill-group h3{
+  display:flex;align-items:center;gap:12px;font-size:1.06rem;color:var(--ink);margin-bottom:24px;
+}
+.skill-group h3 i{
+  width:40px;height:40px;border-radius:11px;font-size:1rem;
+  background:linear-gradient(135deg,var(--mid),var(--bright));color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 5px 14px rgba(21,101,192,.3);
+}
+.skill-item{margin-bottom:18px}
+.skill-item:last-child{margin-bottom:0}
+.skill-label{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:7px}
+.skill-label span{color:var(--ink-soft);font-weight:500}
+.skill-label b{font-family:var(--font-mono);color:var(--mid);font-weight:600;font-size:.82rem}
+.skill-bar{height:9px;border-radius:6px;background:var(--mist);overflow:hidden}
+.skill-fill{
+  height:100%;width:0;border-radius:6px;
+  background:linear-gradient(90deg,var(--mid),var(--bright));
+  transition:width 1.25s cubic-bezier(.22,.8,.3,1);
+  position:relative;
+}
+.skill-fill::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:14px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55));
+}
+.lang-row{
+  max-width:1050px;margin:30px auto 0;display:flex;gap:24px;flex-wrap:wrap;justify-content:center;
+}
+.lang-chip{
+  display:flex;align-items:center;gap:14px;
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:16px 26px;box-shadow:var(--shadow);font-size:.95rem;color:var(--ink-soft);
+}
+.lang-chip i{color:var(--gold);font-size:1.2rem}
+.lang-chip b{color:var(--ink)}
+
+/* ============ Honors ============ */
+#honors{background:var(--whisper)}
+.honors-list{max-width:820px;margin:0 auto}
+.honor{
+  display:flex;align-items:center;gap:20px;
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:18px 26px;margin-bottom:14px;box-shadow:var(--shadow);
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+}
+.honor:hover{transform:translateX(8px);box-shadow:var(--shadow-hover);border-color:rgba(66,165,245,.4)}
+.honor .h-icon{
+  width:46px;height:46px;flex:0 0 46px;border-radius:12px;font-size:1.15rem;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--mist);color:var(--mid);
+}
+.honor.gold .h-icon{background:#fff6d6;color:#c79100}
+.honor.hot .h-icon{background:#fff1ea;color:var(--accent)}
+.honor .h-year{font-family:var(--font-mono);font-size:.78rem;color:var(--grey);flex:0 0 70px}
+.honor .h-text{font-size:.95rem;color:var(--ink);font-weight:500;line-height:1.55}
+.honor .h-text small{display:block;color:var(--grey);font-weight:400;font-size:.8rem}
+
+/* ============ Contact ============ */
+#contact{
+  background:linear-gradient(155deg,var(--deep) 0%,var(--mid) 55%,var(--sky) 100%);
+  position:relative;overflow:hidden;
+}
+#contact::before{
+  content:'';position:absolute;width:540px;height:540px;border-radius:50%;
+  border:1.5px dashed rgba(255,255,255,.18);top:-200px;right:-180px;
+}
+#contact::after{
+  content:'';position:absolute;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,196,0,.18),transparent 70%);bottom:-90px;left:-60px;
+}
+#contact .section-head h2{color:#fff}
+#contact .section-head .eyebrow{color:var(--pale)}
+#contact .section-head p{color:rgba(255,255,255,.78)}
+.contact-grid{
+  position:relative;z-index:2;max-width:860px;margin:0 auto 40px;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:18px;
+}
+@media (max-width:680px){.contact-grid{grid-template-columns:1fr}}
+.contact-item{
+  display:flex;align-items:center;gap:16px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);
+  border-radius:14px;padding:20px 24px;color:#fff;text-decoration:none;
+  backdrop-filter:blur(6px);transition:background .3s,transform .3s;
+}
+.contact-item:hover{background:rgba(255,255,255,.2);transform:translateY(-4px)}
+.contact-item i{
+  width:44px;height:44px;flex:0 0 44px;border-radius:12px;
+  background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+}
+.contact-item span{font-size:.92rem;word-break:break-all}
+.contact-item small{display:block;font-size:.72rem;opacity:.7;font-family:var(--font-mono);letter-spacing:1px}
+.contact-cta{position:relative;z-index:2;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--mid);box-shadow:0 10px 26px rgba(0,0,0,.2)}
+.btn-white:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.28)}
+.btn-amber{background:linear-gradient(135deg,var(--accent),#ff8f5e);color:#fff;box-shadow:0 10px 26px rgba(255,107,53,.4)}
+.btn-amber:hover{transform:translateY(-4px)}
+
+/* ============ Footer ============ */
+footer{
+  background:#0a3d8f;color:rgba(255,255,255,.75);
+  text-align:center;padding:34px 6%;font-size:.86rem;
+}
+footer b{color:#fff}
+footer .sub{font-size:.76rem;opacity:.65;margin-top:6px;font-family:var(--font-mono)}
+footer .heart{color:var(--accent)}
+
+/* ============ Reduced motion ============ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  .reveal{opacity:1;transform:none}
+  body{cursor:auto}
+  .cursor-dot,.cursor-ring,.trail-dot{display:none}
+}
+</style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">Kuan-Yen Chen</div>
-        <div class="nav-links">
-            <a href="#about">學術背景</a>
-            <a href="#thesis">碩士論文</a>
-            <a href="#experience">實務經歷</a>
-            <a href="#projects">專案作品</a>
-            <a href="#skills">技術能力</a>
-            <a href="https://www.linkedin.com/m/in/azure0413/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+<!-- Custom cursor -->
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- ============ NAV ============ -->
+<nav id="nav">
+  <a class="logo" href="#top">
+    <span class="logo-mark">EC</span>
+    <span class="logo-text"><b>陳冠言</b><span>KUAN-YEN CHEN</span></span>
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="選單"><i class="fas fa-bars"></i></button>
+  <div class="nav-links" id="navLinks">
+    <a href="#about">關於我</a>
+    <a href="#education">教育背景</a>
+    <a href="#thesis">論文研究</a>
+    <a href="#projects">作品集</a>
+    <a href="#experience">實習經歷</a>
+    <a href="#skills">技術能力</a>
+    <a href="#contact">聯繫</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <canvas id="particles"></canvas>
+  <div class="hero-deco deco-1" data-parallax="0.18"></div>
+  <div class="hero-deco deco-2" data-parallax="-0.12"></div>
+  <div class="hero-deco deco-3" data-parallax="0.25"></div>
+
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="eyebrow">NCKU CSIE · IIR LAB · M.S. STUDENT</div>
+      <h1>陳冠言<span class="en">Kuan-Yen (Eric) Chen</span></h1>
+      <div class="typewriter-wrap"><span class="typewriter" id="typewriter"></span></div>
+      <p class="hero-tagline">專注於 <strong>Flow Matching</strong> 演算法與生成式 AI 在電腦視覺領域的應用研究，致力於打破人類偏好與機器視覺之間的鴻溝。</p>
+      <p class="hero-tagline-en">"Bridging human perception and machine intelligence through Generative AI and Computer Vision research."</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#contact"><i class="fas fa-paper-plane"></i> 聯繫我</a>
+        <a class="btn btn-outline" href="https://github.com/Azure0413" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+        <a class="btn btn-ghost" href="#thesis"><i class="fas fa-flask"></i> 研究內容</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b><span class="count" data-target="5">0</span><sup>+</sup></b><span>年 ML/DL 經驗</span></div>
+        <div class="stat"><b><span class="count" data-target="3">0</span></b><span>頂尖競賽獎項</span></div>
+        <div class="stat"><b><span class="count" data-target="1">0</span></b><span>SCI 期刊發表</span></div>
+        <div class="stat"><b><span class="count" data-target="10">0</span><sup>+</sup></b><span>完整專案作品</span></div>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-ring"></div>
+      <img src="photo.png" alt="陳冠言 Eric Chen 個人照片">
+    </div>
+  </div>
+</header>
+
+<!-- wave divider -->
+<svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,50 C240,95 420,5 720,42 C1020,80 1200,15 1440,55 L1440,90 L0,90 Z" fill="#f6faff"/>
+  <path d="M0,62 C260,100 480,28 760,55 C1060,84 1260,35 1440,68 L1440,90 L0,90 Z" fill="rgba(144,202,249,.25)"/>
+</svg>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" style="background:var(--whisper);padding-top:70px">
+  <div class="section-head reveal">
+    <div class="eyebrow">ABOUT ME</div>
+    <h2>關於我</h2>
+    <p>From Transportation Science to AI Research — a cross-domain journey</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>我是<strong>陳冠言（Eric）</strong>，目前就讀國立成功大學資訊工程研究所，隸屬<strong>智慧型資訊擷取實驗室（IIR Lab）</strong>，指導教授為<strong>蔣榮先 教授</strong>。</p>
+      <p>我的研究核心聚焦於 <strong>Flow Matching 演算法</strong>在影像逆問題（Inverse Problem）上的應用，特別是<strong>有損壓縮影像的高保真修復</strong>。目標是同時兼顧影像的保真度（Fidelity）、人類視覺感知品質（Perceptual Quality）與下游機器視覺任務表現（Machine Preference）——即「三維度平衡」的影像修復框架 <strong>FDIR</strong>。</p>
+      <p>在研究之外，我熱衷於<strong>生成式 AI 全端系統開發</strong>與<strong>醫療 AI 應用</strong>：曾與成大醫院腎臟科合作建立透析低血壓（IDH）AI 預測系統並部署於臨床；也在國科會 GenAI Stars 競賽中，以「生成式 AI 輔助資料庫操作」獲得<strong>全國特優</strong>。</p>
+      <p>本科就讀成大交通管理科學系（班排第 5），跨域修習大量資訊工程課程，並以大學專題成果於 SCI 期刊 <em>Journal of Advanced Transportation</em> 發表論文。曾就讀台大土木所（GPA 4.09），後因確立對 AI 的熱忱，毅然轉換跑道、全力投入資訊工程研究。</p>
+    </div>
+    <aside class="about-side reveal">
+      <h3><i class="fas fa-compass" style="margin-right:8px"></i>Research Interests</h3>
+      <div class="interest-tags">
+        <span class="itag">Computer Vision</span>
+        <span class="itag">Generative AI</span>
+        <span class="itag">Flow Matching</span>
+        <span class="itag">Diffusion Models</span>
+        <span class="itag">Medical AI</span>
+        <span class="itag">LLM Fine-tuning</span>
+        <span class="itag">Full-Stack Dev</span>
+      </div>
+      <h3><i class="fas fa-id-card" style="margin-right:8px"></i>Quick Facts</h3>
+      <div class="about-fact"><i class="fas fa-graduation-cap"></i>成大資工所 碩士生（2024 — 2026）</div>
+      <div class="about-fact"><i class="fas fa-flask"></i>智慧型資訊擷取實驗室（蔣榮先 教授）</div>
+      <div class="about-fact"><i class="fas fa-location-dot"></i>台南，台灣</div>
+      <div class="about-fact"><i class="fas fa-language"></i>TOEIC 865（金色證書）</div>
+      <div class="about-fact"><i class="fab fa-github"></i>github.com/Azure0413</div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section id="education">
+  <div class="section-head reveal">
+    <div class="eyebrow">EDUCATION</div>
+    <h2>教育背景</h2>
+    <p>Academic Journey · 2019 — Present</p>
+  </div>
+  <div class="timeline">
+    <div class="tcard reveal">
+      <div class="tcard-head">
+        <h3>國立成功大學 <small>資訊工程研究所 · 碩士</small></h3>
+        <span class="date-pill">2024.09 — 至今</span>
+      </div>
+      <p class="role"><i class="fas fa-flask" style="margin-right:6px"></i>智慧型資訊擷取實驗室（IIR Lab）｜指導教授：蔣榮先 教授</p>
+      <ul>
+        <li><strong>研究主題：</strong>Flow Matching Algorithm、Inverse Problem、Image Restoration、Computer Vision</li>
+        <li><strong>碩士論文：</strong>FDIR — 基於單步流匹配兼顧人類與機器偏好之有損壓縮影像高保真修復</li>
+        <li><strong>實驗室計畫：</strong>與成大醫院腎臟科合作維護 IDH 預測與病患管理系統、參與國家級高齡智慧醫院生態系典範計畫</li>
+      </ul>
+      <div><span class="tag">Flow Matching</span><span class="tag">Computer Vision</span><span class="tag">Generative AI</span><span class="tag hot">Medical AI</span></div>
+    </div>
+
+    <div class="tcard reveal">
+      <div class="tcard-head">
+        <h3>國立台灣大學 <small>土木工程研究所 · 碩士（休學）</small></h3>
+        <span class="date-pill">2023.09 — 2024.08</span>
+      </div>
+      <p class="role"><i class="fas fa-star" style="margin-right:6px"></i>GPA：4.09 / 4.3</p>
+      <ul>
+        <li>跨域修習資工電機課程：電腦視覺（與聯發科競賽第一名）、人工智慧、雲原生應用程式開發（台積電合作）</li>
+        <li>在學期間保持優異成績，後因確立對 AI 與資訊工程的熱忱，決定轉換跑道專攻資工領域</li>
+      </ul>
+      <div><span class="tag">Computer Vision</span><span class="tag">AI</span><span class="tag">Cloud Native</span></div>
+    </div>
+
+    <div class="tcard reveal">
+      <div class="tcard-head">
+        <h3>國立成功大學 <small>交通管理科學系 · 學士</small></h3>
+        <span class="date-pill">2019.09 — 2023.06</span>
+      </div>
+      <p class="role"><i class="fas fa-trophy" style="margin-right:6px"></i>班排第 5｜GPA：3.96｜畢業學分 174（門檻 128）</p>
+      <ul>
+        <li><strong>大學專題：</strong>機器學習分析高速公路非典型事故因素及預測嚴重度（指導教授：林珮珺 教授），通過國科會大專學生研究計畫</li>
+        <li><strong>榮譽：</strong>遠通智慧運輸（ITS）獎助學金（班排前 20%）</li>
+        <li><strong>社團：</strong>Google Developer Student Club（GDSC）、資料分析社、鋼琴社</li>
+        <li>完成資訊工程輔系必修，大量修習資通訊課程：資料庫系統 97、作業系統 95、初階程式設計 95、動態網頁 92、自然語言處理 92</li>
+      </ul>
+      <div class="pub">
+        <i class="fas fa-book-open" style="color:#c79100;margin-right:8px"></i>
+        <strong>SCI 期刊發表：</strong>Lin, P. C., <strong>Chen, K. Y.</strong>, &amp; Wang, J. (2025). <a href="https://doi.org/10.1155/atr/8468192" target="_blank" rel="noopener">Predicting Accident Severity on Taiwan Highways Using Machine Learning and Electronic Toll Collection (ETC) Data</a>. <em>Journal of Advanced Transportation</em>, 2025(1), 8468192.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THESIS ============ -->
+<section id="thesis">
+  <div class="section-head reveal">
+    <div class="eyebrow">MASTER'S RESEARCH</div>
+    <h2>碩士論文深度解析</h2>
+    <p>FDIR — 基於單步流匹配兼顧人類與機器偏好之有損壓縮影像高保真修復</p>
+  </div>
+  <div class="thesis-box reveal">
+    <div class="thesis-tabs">
+      <div class="thesis-tab active" data-tab="t-problem">問題與挑戰</div>
+      <div class="thesis-tab" data-tab="t-arch">雙階段架構</div>
+      <div class="thesis-tab" data-tab="t-metric">三維度評估</div>
+      <div class="thesis-tab" data-tab="t-tech">技術亮點</div>
+    </div>
+
+    <div id="t-problem" class="thesis-content active">
+      <div style="display:flex;gap:30px;flex-wrap:wrap;align-items:center">
+        <div style="flex:1.4;min-width:280px">
+          <h4 style="color:var(--deep);font-size:1.1rem;margin-bottom:14px">研究背景</h4>
+          <p style="color:var(--ink-soft);font-size:.96rem;margin-bottom:14px">有損壓縮（JPEG / WebP / AVIF）產生的偽影——區塊效應（Blocking）、振鈴效應（Ringing）與高頻資訊流失——不僅破壞視覺品質，更嚴重影響下游 AI 任務（分類、偵測、識別）的準確度。</p>
+          <p style="color:var(--ink-soft);font-size:.96rem"><strong style="color:var(--ink)">現有困境（Triple Tradeoff）：</strong>傳統修復方法往往顧此失彼——提升感知品質卻犧牲像素保真度，或改善人類觀感卻破壞機器特徵一致性。<strong style="color:var(--accent)">FDIR 的目標正是同時打破這三者的權衡。</strong></p>
         </div>
-    </nav>
-
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; font-weight: 700; color: var(--accent-blue);">Graduate Researcher & Developer</p>
-                <h1>陳冠言 <span style="font-size: 0.5em; font-weight: 300; color: var(--text-grey); display: block; margin-top: 10px;">Kuan-Yen Chen</span></h1>
-                <p>
-                    國立成功大學 資訊工程研究所碩士生<br>
-                    <span style="margin-top: 15px; display: block;">專注於 <span class="typewriter"></span></span>
-                </p>
-                <div style="margin-top: 40px;">
-                    <a href="#projects" class="btn">瀏覽專案作品集</a>
-                    <a href="https://github.com/Azure0413" target="_blank" class="btn btn-outline"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="https://www.linkedin.com/m/in/azure0413/" target="_blank" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                </div>
-            </div>
-            <div class="hero-photo">
-                <img src="photo.png" alt="陳冠言 Kuan-Yen Chen">
-            </div>
+        <div style="flex:1;min-width:240px;background:var(--whisper);border:2px dashed var(--pale);border-radius:16px;padding:28px;text-align:center">
+          <i class="fas fa-compress-arrows-alt" style="font-size:2.6rem;color:var(--accent);margin-bottom:12px"></i>
+          <h5 style="color:var(--ink);margin-bottom:4px">Lossy Compression Artifacts</h5>
+          <p style="font-size:.84rem;color:var(--grey)">Blocking · Ringing · High-Freq Loss<br>↓<br>Human &amp; Machine Quality Degradation</p>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <section id="about">
-        <div class="section-title">
-            <h2>學術研究背景</h2>
-            <p style="margin-top: 15px; color: #78909c;">Education & Research Focus</p>
+    <div id="t-arch" class="thesis-content">
+      <div class="flow-diagram">
+        <div class="flow-node">
+          <i class="fas fa-file-image"></i>
+          <h4>Input x<sub>deg</sub></h4>
+          <p>壓縮退化影像<br>(JPEG / WebP)</p>
         </div>
-        <div class="timeline">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3>國立成功大學 <span style="font-size:0.8em">資訊工程研究所</span></h3>
-                        <span>碩士學位 | 智慧型資訊擷取實驗室 (IIR Lab)</span>
-                    </div>
-                    <span class="card-date">2024.09 - Present</span>
-                </div>
-                <div class="card-content">
-                    <p><strong>指導教授：</strong>蔣榮先 教授</p>
-                    <p><strong>研究主軸：</strong>深入探討生成式 AI (Generative AI) 在電腦視覺中的前沿應用。</p>
-                    <ul>
-                        <li>研究 Flow Matching 演算法於影像逆問題 (Inverse Problem) 之應用。</li>
-                        <li>專案：與成大醫院腎臟科合作，維護病患管理與IDH預測系統。</li>
-                        <li>專案：建立第一間國家級高齡智慧醫院之生態系典範計畫。</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3>國立台灣大學 <span style="font-size:0.8em">土木工程研究所</span></h3>
-                        <span>碩士學位 (休學) | GPA: 4.09/4.3</span>
-                    </div>
-                    <span class="card-date">2023.09 - 2024.08</span>
-                </div>
-                <div class="card-content">
-                    <p><strong>指導教授：</strong>陳柏華 教授</p>
-                    <p>跨領域修課（資工電機）：電腦視覺、人工智慧、雲原生應用程式開發。</p>
-                    <p>在學期間保持優異學術成績，後因確立對 AI 與資訊工程的熱忱，轉換跑道專攻資工領域。</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3>國立成功大學 <span style="font-size:0.8em">交通管理科學系</span></h3>
-                        <span>學士學位 | 班排前 5 (前 20%) | GPA: 3.96</span>
-                    </div>
-                    <span class="card-date">2019.09 - 2023.06</span>
-                </div>
-                <div class="card-content">
-                    <p><strong>大學專題指導教授：</strong>林珮珺 教授</p>
-                    <p><strong>國際期刊發表 (JAT)：</strong>大學專題->發表 <em><a href="https://onlinelibrary.wiley.com/doi/10.1155/atr/8468192">"Predicting Accident Severity on Taiwan Highways Using Machine Learning"</a></em>。</p>
-                    <p>畢業學分174（門檻128），完成資訊工程輔系必修課程且修習諸多資通訊相關技術與課程。</p>
-                    <p>社團經驗：谷哥開發社 GDSC、資料分析社、鋼琴社</p>
-                </div>
-            </div>
+        <div class="flow-arrow"><i class="fas fa-angles-right"></i></div>
+        <div class="flow-node stage">
+          <i class="fas fa-wind"></i>
+          <h4>Stage 1 · QO-Flow</h4>
+          <p>SD3 骨幹 + Flow Matching<br>潛在空間結構性傳輸路徑<br><strong>語義結構恢復</strong></p>
         </div>
-    </section>
-
-    <section id="thesis" style="background-color: #f0f4f8;">
-        <div class="section-title">
-            <h2>碩士論文深度解析</h2>
-            <p style="margin-top: 15px; color: #78909c;">FDIR: Flow-Guided Dual-Stage Image Restoration</p>
+        <div class="flow-arrow"><i class="fas fa-angles-right"></i></div>
+        <div class="flow-node stage">
+          <i class="fas fa-wand-magic-sparkles"></i>
+          <h4>Stage 2 · FCDR</h4>
+          <p>確定性 U-Net 精修<br>τ(QF) 自適應強度控制<br><strong>高頻紋理補償</strong></p>
         </div>
-
-        <div class="thesis-container">
-            <div class="thesis-header">
-                <h3>FDIR 架構與核心技術</h3>
-                <p>基於流引導雙階段架構：平衡保真度、人類視覺感知與機器下游任務表現</p>
-            </div>
-
-            <div class="thesis-tabs">
-                <div class="thesis-tab active" onclick="openThesis(event, 'overview')">問題與挑戰</div>
-                <div class="thesis-tab" onclick="openThesis(event, 'architecture')">雙階段架構 (Visual)</div>
-                <div class="thesis-tab" onclick="openThesis(event, 'stage1')">Stage 1: 結構恢復</div>
-                <div class="thesis-tab" onclick="openThesis(event, 'stage2')">Stage 2: 細節精修</div>
-                <div class="thesis-tab" onclick="openThesis(event, 'results')">三維度評估</div>
-            </div>
-
-            <div id="overview" class="thesis-content active">
-                <div style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
-                    <div style="flex: 1;">
-                        <h4 style="color: var(--dark-blue); margin-bottom: 15px;">研究背景</h4>
-                        <p style="margin-bottom: 10px;">破壞式壓縮（如 JPEG、WebP）會導致嚴重的高頻資訊流失，產生區塊效應（Blocking）與振鈴效應（Ringing）。這些偽影不僅破壞視覺品質，更嚴重影響下游 AI 任務（如分類、偵測）的準確度。</p>
-                        <p><strong>現有困境：</strong>傳統修復往往顧此失彼，提升了視覺美感（Perception）卻犧牲了像素保真度（Distortion），或破壞了特徵一致性導致機器無法識別。</p>
-                    </div>
-                    <div style="flex: 1; background: #fff; padding: 20px; border-radius: 10px; border: 1px dashed #ccc; text-align: center;">
-                        <i class="fas fa-compress-arrows-alt" style="font-size: 3rem; color: #e57373; margin-bottom: 10px;"></i>
-                        <h5>Lossy Compression Artifacts</h5>
-                        <p style="font-size: 0.9rem; color: #666;">Blockiness, Blurring, Noise</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="architecture" class="thesis-content">
-                <div class="diagram-flow">
-                    <div class="diagram-box">
-                        <i class="fas fa-file-image"></i>
-                        <h4>Input x<sub>deg</sub></h4>
-                        <p>壓縮退化影像<br>(JPEG/WebP)</p>
-                    </div>
-                    
-                    <div class="arrow-right"><i class="fas fa-long-arrow-alt-right"></i></div>
-
-                    <div class="diagram-box" style="border-color: var(--dark-blue); background: #e3f2fd;">
-                        <i class="fas fa-wind"></i>
-                        <h4>Stage 1: DDFR</h4>
-                        <p>Dual-Domain Flow Rectification<br><strong>結構與語義恢復</strong></p>
-                    </div>
-
-                    <div class="arrow-right"><i class="fas fa-long-arrow-alt-right"></i></div>
-
-                    <div class="diagram-box" style="border-color: var(--accent-blue); background: #e8eaf6;">
-                        <i class="fas fa-magic"></i>
-                        <h4>Stage 2: FCDR</h4>
-                        <p>Flow-Conditioned Detail Refinement<br><strong>紋理與細節增強</strong></p>
-                    </div>
-
-                    <div class="arrow-right"><i class="fas fa-long-arrow-alt-right"></i></div>
-
-                    <div class="diagram-box">
-                        <i class="fas fa-check-circle" style="color: #4caf50;"></i>
-                        <h4>Output x<sub>hat</sub></h4>
-                        <p>高品質修復影像<br>(Human + Machine Preference)</p>
-                    </div>
-                </div>
-                <div class="diagram-detail">
-                    <p><strong>設計理念：</strong>利用 Flow Matching 的高效結構學習能力（Stage 1），再透過確定性擴散網路概念進行高頻紋理精修（Stage 2）。此「結構-細節分離」策略能同時兼顧影像的整體結構穩定性與局部細節真實感。</p>
-                </div>
-            </div>
-
-            <div id="stage1" class="thesis-content">
-                <h4 style="color: var(--dark-blue);">Stage 1: Dual-Domain Flow Rectification (DDFR)</h4>
-                <p style="margin-bottom: 20px;">利用 Flow Matching 建立從壓縮影像到高品質影像的平滑傳輸路徑。特別設計了「雙域」處理模組：</p>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <i class="fas fa-layer-group" style="color: var(--dark-blue); margin-right: 10px;"></i>
-                        <strong>空域 (Spatial Domain)：</strong> 使用多尺度卷積捕捉區塊邊界與振鈴效應。
-                    </li>
-                    <li style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <i class="fas fa-wave-square" style="color: var(--dark-blue); margin-right: 10px;"></i>
-                        <strong>頻域 (Frequency Domain)：</strong> 引入 DCT 分支，顯式處理頻譜截斷造成的高頻丟失。
-                    </li>
-                </ul>
-            </div>
-
-            <div id="stage2" class="thesis-content">
-                <h4 style="color: var(--dark-blue);">Stage 2: Flow-Conditioned Detail Refinement (FCDR)</h4>
-                <p style="margin-bottom: 20px;">以第一階段生成的結構先驗 x&#770;<sub>FM</sub> 為基礎，專注於生成高頻殘差。</p>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <i class="fas fa-sliders-h" style="color: var(--accent-blue); margin-right: 10px;"></i>
-                        <strong>品質因子控制 (QF Control)：</strong> 引入 &tau;(QF) 參數，根據壓縮程度自適應調整修復強度。低 QF 增強紋理補償，高 QF 保持細節。
-                    </li>
-                    <li style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <i class="fas fa-brain" style="color: var(--accent-blue); margin-right: 10px;"></i>
-                        <strong>特徵一致性：</strong> 在訓練後期引入 Consistency Loss，確保修復後的影像在特徵空間（Feature Space）與原圖一致，保障下游任務效能。
-                    </li>
-                </ul>
-            </div>
-
-            <div id="results" class="thesis-content">
-                <h4 style="color: var(--dark-blue); text-align: center;">三維度評估指標 (The Triple-Tradeoff)</h4>
-                <p style="text-align: center; margin-bottom: 20px;">FDIR 在以下三個維度均取得 SOTA 表現，優於 JPEG、QGAC 與 DDRM。</p>
-            
-                <div class="metric-grid">
-                    <div class="metric-card">
-                        <i class="fas fa-eye" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                        <h5>Perception</h5>
-                        <span>LPIPS, FID</span>
-                        <p style="font-size: 0.8rem; margin-top: 5px;">視覺真實感與自然度</p>
-                    </div>
-                    <div class="metric-card" style="background: var(--secondary-blue); color: var(--text-dark);">
-                        <i class="fas fa-chart-line" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                        <h5>Distortion</h5>
-                        <span>PSNR, SSIM</span>
-                        <p style="font-size: 0.8rem; margin-top: 5px;">像素級保真度</p>
-                    </div>
-                    <div class="metric-card" style="background: var(--bg-white); color: var(--dark-blue); border: 2px solid var(--dark-blue);">
-                        <i class="fas fa-robot" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                        <h5>Task Performance</h5>
-                        <span>Accuracy</span>
-                        <p style="font-size: 0.8rem; margin-top: 5px;">下游機器視覺識別率</p>
-                    </div>
-                </div>
-            </div>
+        <div class="flow-arrow"><i class="fas fa-angles-right"></i></div>
+        <div class="flow-node">
+          <i class="fas fa-circle-check" style="color:var(--accent)"></i>
+          <h4>Output x&#770;</h4>
+          <p>三維度平衡修復影像<br>(Human + Machine)</p>
         </div>
-    </section>
+      </div>
+      <div class="flow-note">
+        <strong>設計理念：</strong>採「結構—細節分離」的雙階段策略。Stage 1 以 Flow Matching 在潛在空間學習壓縮影像到高品質影像的結構性映射；Stage 2 以第一階段輸出作為條件先驗（Condition Prior），輸入品質因子參數 τ(QF) 自適應調整修復強度，專注生成高頻殘差，兼顧整體結構穩定性與局部細節真實感。
+      </div>
+    </div>
 
-    <section id="experience" style="background-color: white;">
-        <div class="section-title">
-            <h2>專業實務經歷</h2>
-            <p style="margin-top: 15px; color: #78909c;">Professional Experience</p>
+    <div id="t-metric" class="thesis-content">
+      <h4 style="color:var(--deep);text-align:center;font-size:1.1rem;margin-bottom:8px">三維度評估指標（Beyond the Perception–Distortion Tradeoff）</h4>
+      <p style="text-align:center;color:var(--grey);font-size:.92rem">FDIR 以「保真、感知、機器偏好」三軸完整評估影像修復品質</p>
+      <div class="tri-grid">
+        <div class="tri-card tri-1">
+          <i class="fas fa-chart-line"></i>
+          <h5>Distortion 保真度</h5>
+          <span class="metric">PSNR · SSIM</span>
+          <p>像素級與結構相似度</p>
         </div>
-        <div class="timeline">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3>台灣大哥大 (Taiwan Mobile)</h3>
-                        <span>IT 實習生 | 資訊架構與系統開發</span>
-                    </div>
-                    <span class="card-date">2023.07 - 2023.10</span>
-                </div>
-                <div class="card-content">
-                    <p>參與企業級資訊系統的後端開發與維運，體驗大型軟體開發生命週期 (SDLC)。</p>
-                    <ul>
-                        <li><strong>系統效能優化：</strong>協助優化企業搜尋引擎，預期將系統回應速度提升 <strong>20%</strong>。</li>
-                        <li><strong>後端微服務開發：</strong>使用 <strong>Java Spring Boot</strong> 與 Python 進行系統元件開發。</li>
-                    </ul>
-                    <div>
-                        <span class="tag">Java Spring Boot</span>
-                        <span class="tag">Python / SQL</span>
-                        <span class="tag">System Architecture</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3>KDAN 凱鈿行動科技</h3>
-                        <span>專案實習生 | 數據科學與機器學習</span>
-                    </div>
-                    <span class="card-date">2022.04 - 2022.06</span>
-                </div>
-                <div class="card-content">
-                    <p>運用資料科學技術解決行銷痛點。</p>
-                    <ul>
-                        <li><strong>精準行銷模型：</strong>分析電子郵件行銷 (EDM) 數據，預期降低 <strong>50%</strong> 的退訂率與垃圾郵件誤判率。</li>
-                    </ul>
-                    <div>
-                        <span class="tag">Python Data Science</span>
-                        <span class="tag">Machine Learning</span>
-                        <span class="tag">Statistics</span>
-                    </div>
-                </div>
-            </div>
+        <div class="tri-card tri-2">
+          <i class="fas fa-eye"></i>
+          <h5>Perception 感知品質</h5>
+          <span class="metric">LPIPS · FID</span>
+          <p>人類視覺真實感與自然度</p>
         </div>
-    </section>
-
-    <section id="projects">
-        <div class="section-title">
-            <h2>精選專案作品</h2>
-            <p style="margin-top: 15px; color: #78909c;">Featured Projects</p>
+        <div class="tri-card tri-3">
+          <i class="fas fa-robot"></i>
+          <h5>Machine Preference</h5>
+          <span class="metric">Task Accuracy</span>
+          <p>下游機器視覺識別表現</p>
         </div>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-body">
-                    <h3>GenAI Stars 生成式AI百工百業應用選拔 特優</h3>
-                    <p class="project-role">Full-Stack & AI Engineer</p>
-                    <p class="project-desc">
-                        <strong>利用生程式AI輔助資料庫操作及管理 <a href="https://unews.nccu.edu.tw/unews/ai-ntu-database">新聞稿</a></strong><br>
-                        透過ORPO演算法利用LoRA進行llama3的fine tune，串接後端與資料庫，讓LLM自行撰寫SQL指令操作Database。
-                    </p>
-                    <div class="project-footer">
-                        <span class="tag">Full-Stack</span>
-                        <span class="tag">Generative AI/Agent</span>
-                        <span class="tag">Database</span>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
 
-            <div class="project-card">
-                <div class="project-body">
-                    <h3>醫療診斷 LLM 智慧助手</h3>
-                    <p class="project-role">LLM Researcher</p>
-                    <p class="project-desc">
-                        採用 <strong>ORPO 演算法</strong> 與 <strong>LoRA</strong> 技術微調 LLM，提升醫療問答準確度。
-                    </p>
-                    <div class="project-footer">
-                        <span class="tag">LLM Fine-tuning</span>
-                        <span class="tag">LoRA / ORPO</span>
-                    </div>
-                </div>
-            </div>
+    <div id="t-tech" class="thesis-content">
+      <ul class="thesis-list">
+        <li><i class="fas fa-bolt"></i><span><strong>單步推論（Single-Step Inference）：</strong>基於 Flow Matching 的直線傳輸路徑，推論效率遠優於傳統多步 Diffusion 採樣。</span></li>
+        <li><i class="fas fa-cube"></i><span><strong>SD3 骨幹 + VAE 潛在空間：</strong>於潛在空間操作以降低計算成本，同時保留高層語義資訊。</span></li>
+        <li><i class="fas fa-sliders"></i><span><strong>QF-Adaptive 機制：</strong>引入 τ(QF) 品質因子參數——低 QF 增強紋理補償，高 QF 保留原始細節。</span></li>
+        <li><i class="fas fa-link"></i><span><strong>特徵一致性約束（Consistency Loss）：</strong>訓練後期確保修復影像在特徵空間與原圖一致，保障下游機器視覺任務效能。</span></li>
+        <li><i class="fas fa-scale-balanced"></i><span><strong>IQA 三軸框架：</strong>以有損壓縮為測試平台，建立同時衡量保真、感知與機器偏好的完整評估方法論。</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-            <div class="project-card">
-                <div class="project-body">
-                    <h3>手骨骨裂 X-ray 影像偵測</h3>
-                    <p class="project-role">Computer Vision Engineer</p>
-                    <p class="project-desc">
-                        <strong>成大資訊工程課程專案</strong><br>
-                        運用 <strong>YOLOv8 + OBB</strong> 辨識骨裂，準確度達 90%，IOU > 0.7。
-                    </p>
-                    <div class="project-footer">
-                        <span class="tag">YOLOv8</span>
-                        <span class="tag">Medical Imaging</span>
-                        <span class="tag">App Dev</span>
-                    </div>
-                </div>
-            </div>
+<!-- ============ PROJECTS ============ -->
+<section id="projects" style="background:#fff">
+  <div class="section-head reveal">
+    <div class="eyebrow">SELECTED WORKS</div>
+    <h2>精選競賽與作品集</h2>
+    <p>Featured Competitions, Research Systems &amp; Projects</p>
+  </div>
+  <div class="projects-grid">
 
-            <div class="project-card">
-                <div class="project-body">
-                    <h3>智慧餐廳推薦系統</h3>
-                    <p class="project-role">Generative AI Developer</p>
-                    <p class="project-desc">
-                        結合 <strong>RAG</strong> 與 <strong>Diffusion Model</strong>，透過圖片相似度檢索尋找餐廳。
-                    </p>
-                    <div class="project-footer">
-                        <span class="tag">RAG</span>
-                        <span class="tag">Diffusion Models</span>
-                        <span class="tag">Django</span>
-                    </div>
-                </div>
-            </div>
+    <div class="pcard featured tilt reveal">
+      <span class="badge">🏆 全國特優</span>
+      <div class="p-icon"><i class="fas fa-database"></i></div>
+      <h3>GenAI Stars 生成式 AI 百工百業應用選拔</h3>
+      <div class="prole">NSTC 國科會 · 2024.10 · FULL-STACK &amp; AI ENGINEER</div>
+      <p class="desc">透過 <strong>ORPO 演算法搭配 LoRA</strong> 微調 LLaMA-3，使 LLM 能自動生成 SQL 指令並直接操作資料庫，打造「無程式碼資料庫管理」解決方案——讓不具技術背景的使用者也能透過自然語言完成 DB 設計、ERD 產生與資料操作。前端 React、後端 Flask，整合 GPT API。</p>
+      <div class="ptags"><span class="tag">LLM Fine-tuning</span><span class="tag">LoRA / ORPO</span><span class="tag">React</span><span class="tag">Flask</span><span class="tag">MySQL</span></div>
+      <a class="plink" href="https://genaistars.org.tw/award/hackathon/15" target="_blank" rel="noopener">作品連結 <i class="fas fa-arrow-right"></i></a>
+    </div>
 
-            <div class="project-card">
-                <div class="project-body">
-                    <h3>Global Motion Compensation</h3>
-                    <p class="project-role">Algorithm Engineer</p>
-                    <p class="project-desc">
-                        <strong>NTUEE 電腦視覺競賽第一名</strong><br>
-                        實作全域運動補償技術壓縮影片，與聯發科合作專案。
-                    </p>
-                    <div class="project-footer">
-                        <span class="tag">Video Compression</span>
-                        <span class="tag">OpenCV</span>
-                    </div>
-                </div>
-            </div>
+    <div class="pcard tilt reveal">
+      <span class="badge blue">臨床部署</span>
+      <div class="p-icon"><i class="fas fa-heart-pulse"></i></div>
+      <h3>成大醫院 IDH 透析低血壓 AI 預測系統</h3>
+      <div class="prole">NCKUH 腎臟科合作 · ML + FULL-STACK</div>
+      <p class="desc">建立序列型 AI 模型預測透析中低血壓（IDH）事件，以 Django 搭建完整前後端與病患管理介面，包含 IDH 風險分級警示燈號、透析紀錄填寫與即時監控看板，與成大醫院腎臟科合作供臨床使用。</p>
+      <div class="ptags"><span class="tag">PyTorch</span><span class="tag">Django</span><span class="tag">Sequential Model</span><span class="tag hot">Clinical ML</span></div>
+      <a class="plink" href="https://github.com/Azure0413-project/IDH" target="_blank" rel="noopener">GitHub <i class="fas fa-arrow-right"></i></a>
+    </div>
 
-            <div class="project-card">
-                <div class="project-body">
-                    <h3>互動式點餐平台</h3>
-                    <p class="project-role">Web Full-Stack Developer</p>
-                    <p class="project-desc">
-                        <strong>Web 2.0 互動平台</strong><br>
-                        台大資工與台積電TSMC產學合作課程。構建用戶端與商家端互動系統。串接 MySQL 資料庫，並使用 JEST 進行單元測試確保程式碼品質。
-                    </p>
-                    <div class="project-footer">
-                        <span class="tag">React</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">JEST</span>
-                        <span class="tag">MySQL</span>
-                    </div>
-                </div>
-            </div>
+    <div class="pcard tilt reveal">
+      <span class="badge gold">🥇 第一名</span>
+      <div class="p-icon"><i class="fas fa-video"></i></div>
+      <h3>Global Motion Compensation 影片壓縮</h3>
+      <div class="prole">NTUEE 電腦視覺 × MediaTek 聯發科 · 2024</div>
+      <p class="desc">實作全域運動補償（GMC）進行影片壓縮。面對 C(1000+, 12) 的龐大組合搜尋空間，設計高效演算法（Homography 過濾 → Top-K 選擇 → 局部最佳化），僅以仿射/投影/透視變換找出最佳組合，奪下競賽 Leaderboard 第一。</p>
+      <div class="ptags"><span class="tag">Computer Vision</span><span class="tag">Video Compression</span><span class="tag">OpenCV</span></div>
+      <a class="plink" href="https://github.com/Azure0413/computer-vision-112-NTU" target="_blank" rel="noopener">GitHub <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="pcard tilt reveal">
+      <span class="badge gold">📝 SCI 期刊</span>
+      <div class="p-icon"><i class="fas fa-road"></i></div>
+      <h3>台灣公路事故嚴重度預測研究</h3>
+      <div class="prole">Journal of Advanced Transportation (Wiley, 2025)</div>
+      <p class="desc">結合台灣 ETC 電子收費系統高解析度數據，以 XGBoost、LASSO、Random Forest 進行特徵工程與交叉驗證，搭配 SMOTE 資料平衡與 Apriori 關聯分析，挖掘光線、天氣、時段、地點、車型等非典型事故因素，嚴重度預測 F1-score 達 90%。</p>
+      <div class="ptags"><span class="tag">XGBoost</span><span class="tag">LASSO</span><span class="tag">SMOTE</span><span class="tag">Apriori</span></div>
+      <a class="plink" href="https://doi.org/10.1155/atr/8468192" target="_blank" rel="noopener">DOI 全文 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="pcard tilt reveal">
+      <div class="p-icon"><i class="fas fa-utensils"></i></div>
+      <h3>智慧餐廳推薦系統</h3>
+      <div class="prole">IIR 實驗室 PROJECT · GENAI DEVELOPER</div>
+      <p class="desc">LLM 結合 <strong>RAG 與 Prompt Rewriting</strong> 理解使用者需求，再由 Diffusion Model 生成理想餐點圖片，與資料庫圖片計算相似度檢索出最匹配的餐廳。Django 全端建置，整合在地餐廳資料。</p>
+      <div class="ptags"><span class="tag">RAG</span><span class="tag">Diffusion Model</span><span class="tag">Image Retrieval</span><span class="tag">Django</span></div>
+      <a class="plink" href="https://github.com/Azure0413-project/IIR_Project_0" target="_blank" rel="noopener">GitHub <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="pcard tilt reveal">
+      <div class="p-icon"><i class="fas fa-stethoscope"></i></div>
+      <h3>醫療診斷 LLM 智慧助手</h3>
+      <div class="prole">成大資工專論課程 · LLM RESEARCHER</div>
+      <p class="desc">採用 <strong>ORPO + LoRA</strong> 微調醫療領域 LLM，結合 Chain-of-Thought Prompt Engineering 提升臨床推理品質，並以 Flask 建立網頁介面，提供病例描述與診斷建議問答。</p>
+      <div class="ptags"><span class="tag">LLM</span><span class="tag">LoRA / ORPO</span><span class="tag">CoT Prompting</span><span class="tag hot">Medical AI</span></div>
+      <a class="plink" href="https://github.com/Azure0413/Medical_Diagnosis_LLM" target="_blank" rel="noopener">GitHub <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="pcard tilt reveal">
+      <div class="p-icon"><i class="fas fa-x-ray"></i></div>
+      <h3>手骨骨裂 X-Ray 影像偵測系統</h3>
+      <div class="prole">成大資工影像處理課程 · CV ENGINEER</div>
+      <p class="desc">使用 <strong>YOLOv8 搭配 OBB</strong>（Oriented Bounding Box）辨識不同角度的手骨骨裂位置，建置完整上傳、前處理、標記與評估介面。準確率達 90%、IOU &gt; 0.7。</p>
+      <div class="ptags"><span class="tag">YOLOv8</span><span class="tag">OBB</span><span class="tag">Medical Imaging</span></div>
+      <a class="plink" href="https://github.com/Azure0413/NCKU_Image_Processing" target="_blank" rel="noopener">GitHub <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="pcard tilt reveal">
+      <div class="p-icon"><i class="fas fa-mobile-screen"></i></div>
+      <h3>互動式點餐平台</h3>
+      <div class="prole">台大資工 × 台積電 TSMC 雲原生課程</div>
+      <p class="desc">Web 2.0 互動點餐平台，支援消費者端與商家端雙端操作（15 個廠區、餐廳瀏覽、購物車、訂單追蹤、評價系統）。React + Node.js (Express) 實作 RESTful API，串接 MySQL（Sequelize ORM），以 JEST 單元測試確保品質。</p>
+      <div class="ptags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MySQL</span><span class="tag">JEST</span></div>
+      <a class="plink" href="https://github.com/Azure0413/MealOrderAPP" target="_blank" rel="noopener">GitHub <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="pcard tilt reveal">
+      <div class="p-icon"><i class="fas fa-microchip"></i></div>
+      <h3>YOLOv2 硬體加速系統（PYNQ-Z2）</h3>
+      <div class="prole">成大資工深度學習積體電路設計</div>
+      <p class="desc">於 FPGA（PYNQ-Z2）上實作 YOLOv2 加速器：DRAM 資料搬移、On-Chip Buffer、Ping-Pong Buffering、AXI4 介面與優化權重排列，完成軟硬體協同的即時物件偵測系統。</p>
+      <div class="ptags"><span class="tag">Verilog</span><span class="tag">FPGA</span><span class="tag">AXI4</span><span class="tag">HW/SW Co-design</span></div>
+      <a class="plink" href="https://github.com/Azure0413/NCKU_DL_IC-Design/tree/main/Final_Project" target="_blank" rel="noopener">GitHub <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience">
+  <div class="section-head reveal">
+    <div class="eyebrow">WORK EXPERIENCE</div>
+    <h2>專業實習經歷</h2>
+    <p>Industry Internships</p>
+  </div>
+  <div class="exp-wrap">
+    <div class="exp-card reveal">
+      <div class="exp-head">
+        <div>
+          <h3>台灣大哥大 Taiwan Mobile</h3>
+          <span class="role">IT 實習生｜資訊架構與系統開發 · 台北</span>
         </div>
-    </section>
+        <span class="date-pill">2023.07 — 2023.10</span>
+      </div>
+      <ul>
+        <li>使用 <strong>Spring Boot + MongoDB + Drools + Maven</strong> 開發企業低代碼平台，讓企業能自主建置內部系統</li>
+        <li>協助優化企業內部搜尋引擎，預期將搜尋速度提升 <strong>20%～30%</strong></li>
+        <li>參與系統元件設計、資料庫設計優化與後端微服務架構，完整體驗大型軟體開發生命週期（SDLC）</li>
+      </ul>
+      <div><span class="tag">Java Spring Boot</span><span class="tag">MongoDB</span><span class="tag">Drools</span><span class="tag">System Architecture</span></div>
+    </div>
 
-    <section id="skills" class="skills-section">
-        <div class="section-title">
-            <h2>技術能力</h2>
+    <div class="exp-card reveal">
+      <div class="exp-head">
+        <div>
+          <h3>KDAN 凱鈿行動科技</h3>
+          <span class="role">資料科學專案實習生 · 台南</span>
         </div>
-        <div class="skills-container">
-            <div class="skill-item"><i class="fab fa-python"></i> Python</div>
-            <div class="skill-item"><i class="fas fa-code"></i> C++</div>
-            <div class="skill-item"><i class="fab fa-java"></i> Java</div>
-            <div class="skill-item"><i class="fab fa-react"></i> React</div>
-            <div class="skill-item"><i class="fab fa-node-js"></i> Node.js</div>
-            <div class="skill-item"><i class="fas fa-database"></i> SQL</div>
-            <div class="skill-item"><i class="fas fa-brain"></i> PyTorch</div>
-            <div class="skill-item"><i class="fas fa-microchip"></i> Verilog</div>
-        </div>
-    </section>
+        <span class="date-pill">2022.04 — 2022.06</span>
+      </div>
+      <ul>
+        <li>分析電子郵件行銷（EDM）數據，以 <strong>XGBoost、LDA、SVM</strong> 建模預測訂閱取消行為</li>
+        <li>運用 <strong>BERT</strong> 進行主旨語意分類，精準辨識垃圾郵件特徵模式</li>
+        <li>結合 SMOTE 處理資料不平衡，預期降低退訂率與垃圾郵件誤判率約 <strong>50%</strong></li>
+      </ul>
+      <div><span class="tag">Python</span><span class="tag">XGBoost</span><span class="tag">BERT</span><span class="tag">SMOTE</span><span class="tag">Sklearn</span></div>
+    </div>
+  </div>
+</section>
 
-    <section id="contact" style="text-align: center; padding-bottom: 80px; background: linear-gradient(to bottom, #ffffff, #f0f4f8);">
-        <div class="section-title">
-            <h2>與我聯繫</h2>
-        </div>
-        <div class="social-icons">
-            <a href="mailto:ericchen4411@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/Azure0413" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/m/in/azure0413/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        </div>
-    </section>
+<!-- ============ SKILLS ============ -->
+<section id="skills" style="background:#fff">
+  <div class="section-head reveal">
+    <div class="eyebrow">TECHNICAL SKILLS</div>
+    <h2>技術能力</h2>
+    <p>5+ years of hands-on ML/DL &amp; full-stack development</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <h3><i class="fas fa-brain"></i>AI / ML 研究</h3>
+      <div class="skill-item"><div class="skill-label"><span>PyTorch</span><b>95%</b></div><div class="skill-bar"><div class="skill-fill" data-w="95"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>Computer Vision（OpenCV / YOLO）</span><b>90%</b></div><div class="skill-bar"><div class="skill-fill" data-w="90"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>Scikit-learn / TensorFlow</span><b>90%</b></div><div class="skill-bar"><div class="skill-fill" data-w="90"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>Flow Matching / Diffusion Models</span><b>85%</b></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>LLM Fine-tuning（LoRA / ORPO）</span><b>85%</b></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+    </div>
+    <div class="skill-group reveal">
+      <h3><i class="fas fa-code"></i>程式語言</h3>
+      <div class="skill-item"><div class="skill-label"><span>Python</span><b>95%</b></div><div class="skill-bar"><div class="skill-fill" data-w="95"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>JavaScript</span><b>85%</b></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>C++</span><b>75%</b></div><div class="skill-bar"><div class="skill-fill" data-w="75"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>Java</span><b>75%</b></div><div class="skill-bar"><div class="skill-fill" data-w="75"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>SQL</span><b>85%</b></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+    </div>
+    <div class="skill-group reveal">
+      <h3><i class="fas fa-laptop-code"></i>Web 全端開發</h3>
+      <div class="skill-item"><div class="skill-label"><span>Django / Flask</span><b>90%</b></div><div class="skill-bar"><div class="skill-fill" data-w="90"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>React</span><b>85%</b></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>Node.js（Express）</span><b>85%</b></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>MySQL / MongoDB</span><b>85%</b></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+    </div>
+    <div class="skill-group reveal">
+      <h3><i class="fas fa-microchip"></i>硬體與工具</h3>
+      <div class="skill-item"><div class="skill-label"><span>Git / GitHub / Linux</span><b>92%</b></div><div class="skill-bar"><div class="skill-fill" data-w="92"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>Verilog / Vivado / Modelsim</span><b>65%</b></div><div class="skill-bar"><div class="skill-fill" data-w="65"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>RISC-V Architecture</span><b>60%</b></div><div class="skill-bar"><div class="skill-fill" data-w="60"></div></div></div>
+      <div class="skill-item"><div class="skill-label"><span>Docker</span><b>75%</b></div><div class="skill-bar"><div class="skill-fill" data-w="75"></div></div></div>
+    </div>
+  </div>
+  <div class="lang-row reveal">
+    <div class="lang-chip"><i class="fas fa-language"></i><span><b>中文（繁體）</b>｜母語</span></div>
+    <div class="lang-chip"><i class="fas fa-certificate"></i><span><b>英文</b>｜TOEIC 865 金色證書 — 專業工作流利程度</span></div>
+  </div>
+</section>
 
-    <footer>
-        <p>&copy; 2025 Kuan-Yen Chen. All Rights Reserved.</p>
-    </footer>
+<!-- ============ HONORS ============ -->
+<section id="honors">
+  <div class="section-head reveal">
+    <div class="eyebrow">HONORS &amp; AWARDS</div>
+    <h2>榮譽與獎項</h2>
+    <p>Competition Awards &amp; Academic Recognition</p>
+  </div>
+  <div class="honors-list">
+    <div class="honor hot reveal">
+      <div class="h-icon"><i class="fas fa-trophy"></i></div>
+      <span class="h-year">2024.10</span>
+      <div class="h-text">國科會 GenAI Stars 生成式 AI 百工百業應用選拔 <b style="color:var(--accent)">特優</b><small>數位轉型時代——以生成式 AI 幫助架設和更新資料庫</small></div>
+    </div>
+    <div class="honor gold reveal">
+      <div class="h-icon"><i class="fas fa-medal"></i></div>
+      <span class="h-year">2024</span>
+      <div class="h-text">NTUEE 電腦視覺競賽 × 聯發科 MediaTek <b style="color:#c79100">第一名</b><small>Global Motion Compensation Leaderboard 1st</small></div>
+    </div>
+    <div class="honor gold reveal">
+      <div class="h-icon"><i class="fas fa-book-open"></i></div>
+      <span class="h-year">2025</span>
+      <div class="h-text">SCI 期刊發表：<i>Journal of Advanced Transportation</i> (Wiley)<small>Predicting Accident Severity on Taiwan Highways Using ML and ETC Data</small></div>
+    </div>
+    <div class="honor reveal">
+      <div class="h-icon"><i class="fas fa-award"></i></div>
+      <span class="h-year">2024.08</span>
+      <div class="h-text">第三屆 Tech New Stars 科技新秀大賽 入圍<small>創新科技應用 · 生成式 AI 服務</small></div>
+    </div>
+    <div class="honor reveal">
+      <div class="h-icon"><i class="fas fa-award"></i></div>
+      <span class="h-year">2023.07</span>
+      <div class="h-text">數位發展部 數據驅動創新應用大賽 入圍<small>YESP — YouBike Extreme Scrum Planning</small></div>
+    </div>
+    <div class="honor reveal">
+      <div class="h-icon"><i class="fas fa-award"></i></div>
+      <span class="h-year">2023.06</span>
+      <div class="h-text">成大敏求智慧運算學院 創新與發展競賽 佳作<small>MBTI 文本分析及預測（NLP / BERT）</small></div>
+    </div>
+    <div class="honor reveal">
+      <div class="h-icon"><i class="fas fa-medal"></i></div>
+      <span class="h-year">2022.02</span>
+      <div class="h-text">教育部數位創新實驗計畫 Coding-X 專案競賽 <b style="color:var(--mid)">第二名</b><small>機車 P 醬——YOLO 機車停車位影像辨識</small></div>
+    </div>
+    <div class="honor reveal">
+      <div class="h-icon"><i class="fas fa-graduation-cap"></i></div>
+      <span class="h-year">2022</span>
+      <div class="h-text">遠通智慧運輸（ITS）獎助學金<small>班排前 20% 成績優異獎助</small></div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Typewriter Effect
-        const text = "Generative AI | Computer Vision | Full-Stack Dev";
-        const typeWriterElement = document.querySelector('.typewriter');
-        let i = 0;
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="section-head reveal">
+    <div class="eyebrow">GET IN TOUCH</div>
+    <h2>與我聯繫</h2>
+    <p>Open to research collaboration &amp; engineering opportunities</p>
+  </div>
+  <div class="contact-grid reveal">
+    <a class="contact-item" href="mailto:ericchen4411@gmail.com">
+      <i class="fas fa-envelope"></i>
+      <div><small>EMAIL</small><span>ericchen4411@gmail.com</span></div>
+    </a>
+    <a class="contact-item" href="https://github.com/Azure0413" target="_blank" rel="noopener">
+      <i class="fab fa-github"></i>
+      <div><small>GITHUB</small><span>github.com/Azure0413</span></div>
+    </a>
+    <a class="contact-item" href="https://www.linkedin.com/in/azure0413" target="_blank" rel="noopener">
+      <i class="fab fa-linkedin-in"></i>
+      <div><small>LINKEDIN</small><span>linkedin.com/in/azure0413</span></div>
+    </a>
+    <div class="contact-item">
+      <i class="fas fa-location-dot"></i>
+      <div><small>LOCATION</small><span>台南，台灣 Tainan, Taiwan (R.O.C.)</span></div>
+    </div>
+  </div>
+  <div class="contact-cta reveal">
+    <a class="btn btn-white" href="mailto:ericchen4411@gmail.com"><i class="fas fa-paper-plane"></i> 寄送 Email</a>
+    <a class="btn btn-amber" href="https://github.com/Azure0413" target="_blank" rel="noopener"><i class="fab fa-github"></i> 查看 GitHub</a>
+  </div>
+</section>
 
-        function typeWriter() {
-            if (i < text.length) {
-                typeWriterElement.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 80);
-            }
+<footer>
+  <p>© 2025 <b>陳冠言 Kuan-Yen Chen (Eric)</b>. All Rights Reserved.</p>
+  <p>國立成功大學 資訊工程研究所 · 智慧型資訊擷取實驗室（IIR Lab）</p>
+  <p class="sub">Built with <span class="heart">❤</span> and Flow Matching</p>
+</footer>
+
+<script>
+/* ================== Utilities ================== */
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+/* ================== Custom Cursor (ukiyo-e flow trail) ================== */
+if (finePointer && !prefersReduced) {
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  const TRAIL = 8;
+  const trails = [];
+  for (let i = 0; i < TRAIL; i++) {
+    const t = document.createElement('div');
+    t.className = 'trail-dot';
+    document.body.appendChild(t);
+    trails.push({ el: t, x: innerWidth / 2, y: innerHeight / 2 });
+  }
+  let mx = innerWidth / 2, my = innerHeight / 2;
+  let rx = mx, ry = my;
+
+  addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  function loopCursor() {
+    dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    let px = mx, py = my;
+    trails.forEach((t, i) => {
+      const ease = 0.32 - i * 0.028;
+      t.x += (px - t.x) * ease;
+      t.y += (py - t.y) * ease;
+      // slight sinusoidal drift = wave/flow feel
+      const wob = Math.sin(Date.now() / 240 + i * 1.1) * (i * 0.9);
+      t.el.style.transform = `translate(${t.x}px,${t.y + wob}px) translate(-50%,-50%)`;
+      t.el.style.opacity = (1 - i / TRAIL) * 0.75;
+      px = t.x; py = t.y;
+    });
+    requestAnimationFrame(loopCursor);
+  }
+  loopCursor();
+
+  // hover grow
+  const hoverables = 'a, button, .thesis-tab, .pcard, .itag, .honor';
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest(hoverables)) ring.classList.add('is-hover');
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest(hoverables)) ring.classList.remove('is-hover');
+  });
+
+  // click ripple
+  addEventListener('mousedown', e => {
+    const r = document.createElement('div');
+    r.className = 'ripple';
+    r.style.left = e.clientX + 'px';
+    r.style.top = e.clientY + 'px';
+    document.body.appendChild(r);
+    setTimeout(() => r.remove(), 750);
+  });
+}
+
+/* ================== Nav ================== */
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', scrollY > 100);
+}, { passive: true });
+
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => navLinks.classList.remove('open'))
+);
+
+/* ================== Hero particles ================== */
+(function () {
+  const canvas = document.getElementById('particles');
+  if (!canvas || prefersReduced) return;
+  const ctx = canvas.getContext('2d');
+  const hero = canvas.parentElement;
+  let W, H, parts = [];
+  const N = innerWidth < 700 ? 55 : 110;
+  const LINK = 145, REPEL = 120;
+  const mouse = { x: -9999, y: -9999 };
+
+  function resize() {
+    W = canvas.width = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+  resize();
+  addEventListener('resize', resize);
+
+  hero.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+  });
+  hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+  for (let i = 0; i < N; i++) {
+    parts.push({
+      x: Math.random() * innerWidth,
+      y: Math.random() * innerHeight,
+      vx: (Math.random() - 0.5) * 0.45,
+      vy: (Math.random() - 0.5) * 0.45,
+      r: Math.random() * 2.2 + 1
+    });
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    for (const p of parts) {
+      // mouse repulsion
+      const dx = p.x - mouse.x, dy = p.y - mouse.y;
+      const d = Math.hypot(dx, dy);
+      if (d < REPEL && d > 0.1) {
+        const f = (REPEL - d) / REPEL * 0.6;
+        p.vx += (dx / d) * f * 0.25;
+        p.vy += (dy / d) * f * 0.25;
+      }
+      p.vx = Math.max(-0.9, Math.min(0.9, p.vx * 0.985));
+      p.vy = Math.max(-0.9, Math.min(0.9, p.vy * 0.985));
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      p.x = Math.max(0, Math.min(W, p.x));
+      p.y = Math.max(0, Math.min(H, p.y));
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(66,165,245,.55)';
+      ctx.fill();
+    }
+    // links
+    for (let i = 0; i < parts.length; i++) {
+      for (let j = i + 1; j < parts.length; j++) {
+        const a = parts[i], b = parts[j];
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < LINK) {
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(25,118,210,${(1 - d / LINK) * 0.22})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
         }
-        setTimeout(typeWriter, 500);
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
 
-        // Scroll Reveal
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+/* ================== Typewriter ================== */
+(function () {
+  const el = document.getElementById('typewriter');
+  const roles = [
+    'Computer Vision Researcher',
+    'Generative AI Developer',
+    'Flow Matching Specialist',
+    'Full-Stack Engineer',
+    'ML / DL Practitioner'
+  ];
+  let ri = 0, ci = 0, deleting = false;
+  function tick() {
+    const word = roles[ri];
+    if (!deleting) {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; return setTimeout(tick, 1500); }
+      setTimeout(tick, 70);
+    } else {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; return setTimeout(tick, 350); }
+      setTimeout(tick, 38);
+    }
+  }
+  setTimeout(tick, 600);
+})();
 
-        document.querySelectorAll('.card, .project-card, .thesis-container').forEach(el => observer.observe(el));
+/* ================== Scroll reveal w/ stagger ================== */
+const io = new IntersectionObserver((entries, obs) => {
+  entries.forEach(en => {
+    if (en.isIntersecting) {
+      const siblings = [...en.target.parentElement.querySelectorAll(':scope > .reveal')];
+      const idx = Math.max(0, siblings.indexOf(en.target));
+      setTimeout(() => en.target.classList.add('visible'), idx * 80);
+      obs.unobserve(en.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-        // Thesis Tabs Logic
-        function openThesis(evt, tabName) {
-            var i, content, tablinks;
-            content = document.getElementsByClassName("thesis-content");
-            for (i = 0; i < content.length; i++) {
-                content[i].style.display = "none";
-                content[i].classList.remove("active");
-            }
-            tablinks = document.getElementsByClassName("thesis-tab");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            setTimeout(() => {
-                document.getElementById(tabName).classList.add("active");
-            }, 10);
-            evt.currentTarget.className += " active";
-        }
-    </script>
+/* ================== Counter-up ================== */
+const counterIO = new IntersectionObserver((entries, obs) => {
+  entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    const el = en.target;
+    const target = +el.dataset.target;
+    const dur = 1400, t0 = performance.now();
+    (function step(t) {
+      const p = Math.min(1, (t - t0) / dur);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+    obs.unobserve(el);
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.count').forEach(el => counterIO.observe(el));
+
+/* ================== Skill bars ================== */
+const barIO = new IntersectionObserver((entries, obs) => {
+  entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    en.target.querySelectorAll('.skill-fill').forEach((f, i) => {
+      setTimeout(() => f.style.width = f.dataset.w + '%', i * 120);
+    });
+    obs.unobserve(en.target);
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.skill-group').forEach(g => barIO.observe(g));
+
+/* ================== 3D tilt + glare ================== */
+if (finePointer && !prefersReduced) {
+  document.querySelectorAll('.tilt').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      const rx = (y - 0.5) * -8;
+      const ry = (x - 0.5) * 8;
+      card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      card.style.setProperty('--gx', (x * 100) + '%');
+      card.style.setProperty('--gy', (y * 100) + '%');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(900px) rotateX(0) rotateY(0)';
+    });
+  });
+}
+
+/* ================== Parallax (hero decorations) ================== */
+if (!prefersReduced) {
+  const decos = document.querySelectorAll('[data-parallax]');
+  addEventListener('scroll', () => {
+    const y = scrollY;
+    decos.forEach(d => {
+      d.style.transform = `translateY(${y * +d.dataset.parallax}px)`;
+    });
+  }, { passive: true });
+}
+
+/* ================== Thesis tabs ================== */
+document.querySelectorAll('.thesis-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.thesis-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.thesis-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+</script>
 </body>
-
 </html>
-
-
-
-
-
-
-
