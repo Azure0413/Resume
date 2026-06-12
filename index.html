@@ -668,7 +668,7 @@ footer .heart{color:var(--accent)}
     <div class="about-text reveal">
       <p>我是<strong>陳冠言（Eric）</strong>，目前就讀國立成功大學資訊工程研究所，隸屬<strong>智慧型資訊擷取實驗室（IIR Lab）</strong>，指導教授為<strong>蔣榮先 教授</strong>。</p>
       <p>我的研究核心聚焦於 <strong>Flow Matching 演算法</strong>在影像逆問題（Inverse Problem）上的應用，特別是<strong>有損壓縮影像的高保真修復</strong>。目標是同時兼顧影像的保真度（Fidelity）、人類視覺感知品質（Perceptual Quality）與下游機器視覺任務表現（Machine Preference）——即「三維度平衡」的影像修復框架 <strong>FDIR</strong>。</p>
-      <p>在研究之外，我熱衷於<strong>生成式 AI 全端系統開發</strong>與<strong>醫療 AI 應用</strong>：曾與成大醫院腎臟科合作建立透析低血壓（IDH）AI 預測系統並部署於臨床；也在國科會 GenAI Stars 競賽中，以「生成式 AI 輔助資料庫操作」獲得<strong>全國特優</strong>。</p>
+      <p>我的研究橫跨兩條主線：除了影像修復，也投入 <strong>LLM Agent 推理行為</strong>研究，以第一作者發表《The Self-Correction Illusion》，揭示語言模型自我修正失敗其實源於 chat-template 的角色標籤假象。此外我熱衷於<strong>生成式 AI 全端系統開發</strong>與<strong>醫療 AI 應用</strong>：曾與成大醫院腎臟科合作建立透析低血壓（IDH）AI 預測系統並部署於臨床，也在國科會 GenAI Stars 競賽以「生成式 AI 輔助資料庫操作」獲得<strong>全國特優</strong>。</p>
       <p>本科就讀成大交通管理科學系（班排第 5），跨域修習大量資訊工程課程，並以大學專題成果於 SCI 期刊 <em>Journal of Advanced Transportation</em> 發表論文。曾就讀台大土木所（GPA 4.09），後因確立對 AI 的熱忱，毅然轉換跑道、全力投入資訊工程研究。</p>
     </div>
     <aside class="about-side reveal">
@@ -713,10 +713,10 @@ footer .heart{color:var(--accent)}
       </ul>
       <div class="pub">
         <i class="fas fa-file-lines" style="color:#c79100;margin-right:8px"></i>
-        <strong>arXiv 預印本：</strong>FDIR — Flow-Matching-based High-Fidelity Restoration of Lossy Compressed Images.
+        <strong>arXiv 論文（第一作者）：</strong>Chen, K. Y., Su, F. Y., &amp; Chiang, J. H. (2026). The Self-Correction Illusion: LLMs Correct Others but Not Themselves.
         <a href="https://arxiv.org/abs/2606.05976" target="_blank" rel="noopener">arXiv:2606.05976</a>
       </div>
-      <div><span class="tag">Flow Matching</span><span class="tag">Computer Vision</span><span class="tag">Generative AI</span><span class="tag hot">Medical AI</span></div>
+      <div><span class="tag">Flow Matching</span><span class="tag">Computer Vision</span><span class="tag">Generative AI</span><span class="tag">LLM Agents</span><span class="tag hot">Medical AI</span></div>
     </div>
 
     <div class="tcard reveal">
@@ -897,6 +897,16 @@ footer .heart{color:var(--accent)}
       <p class="desc">結合台灣 ETC 電子收費系統高解析度數據，以 XGBoost、LASSO、Random Forest 進行特徵工程與交叉驗證，搭配 SMOTE 資料平衡與 Apriori 關聯分析，挖掘光線、天氣、時段、地點、車型等非典型事故因素，嚴重度預測 F1-score 達 90%。</p>
       <div class="ptags"><span class="tag">XGBoost</span><span class="tag">LASSO</span><span class="tag">SMOTE</span><span class="tag">Apriori</span></div>
       <a class="plink" href="https://doi.org/10.1155/atr/8468192" target="_blank" rel="noopener">DOI 全文 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="pcard tilt reveal">
+      <span class="badge gold">📄 第一作者</span>
+      <div class="p-icon"><i class="fas fa-robot"></i></div>
+      <h3>The Self-Correction Illusion (LLM Agents)</h3>
+      <div class="prole">arXiv 2026 · cs.AI / cs.CL · FIRST AUTHOR</div>
+      <p class="desc">探討 LLM「能糾正他人、卻無法糾正自己」的不對稱現象。透過 SHA-256 位元完全相同的錯誤宣稱、僅變動其 chat-template 角色標籤（&lt;thought&gt; / user / tool / &lt;memory&gt;），在 7 個模型家族、3 個領域、13 個 cell 上證明：自我修正失敗並非認知缺陷，而是<strong>角色標籤假象（role-label artifact）</strong>。並提出免訓練、純 prompt 結構的介入方法。</p>
+      <div class="ptags"><span class="tag">LLM Agents</span><span class="tag">Self-Correction</span><span class="tag">Prompt Structure</span><span class="tag">Reasoning</span></div>
+      <a class="plink" href="https://arxiv.org/abs/2606.05976" target="_blank" rel="noopener">arXiv:2606.05976 <i class="fas fa-arrow-right"></i></a>
     </div>
 
     <div class="pcard tilt reveal">
